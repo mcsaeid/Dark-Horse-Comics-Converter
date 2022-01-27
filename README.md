@@ -8,7 +8,7 @@ The scripts use the following Python modules: *os, json, tarfile, zipfile, shuti
 **Table of Contents**
 * [Disclaimer](https://github.com/mcsaeid/Dark-Horse-Comics-Converter#disclaimer)
 * [How to Use](https://github.com/mcsaeid/Dark-Horse-Comics-Converter#how-to-use)
-* [FAQs](https://github.com/mcsaeid/Dark-Horse-Comics-Converter#faqs)
+* [FAQ](https://github.com/mcsaeid/Dark-Horse-Comics-Converter#faq)
 
 # Disclaimer
 
@@ -33,7 +33,7 @@ iv) Get the book title and rename the CBZ file.
 
 You will find the CBZ file in the same folder where you downloaded the “book.tar.” You can now safely delete the tar file if you like.
 
-# FAQs
+# FAQ
 **Question:** I don’t have the googlesearch module. How do I install it?\
 **Answer:** You can find it here: https://pypi.org/project/googlesearch-python.
 
