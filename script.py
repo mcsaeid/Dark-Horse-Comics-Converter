@@ -4,29 +4,30 @@ import tarfile
 import zipfile
 import shutil
 import requests
+import time
 from googlesearch import search
 import bs4
 
-print('This script will convert your dark horse comic to cbz\n')
+print('This script will convert your Dark Horse comics to a CBZ format.\n')
 
 while True:
     print('-'*25)
-    tar_path = input('Enter path of tar file = ')
+    tar_path = input('Enter the path of the tar file: ')
     folder_path = os.path.dirname(tar_path)
     new_path = fr"{folder_path}\book"
 
-    #un-tar the file
+    #Extracting the tar file
 
-    print('Extracting the tar file...')
+    print('\nExtracting the tar file . . .')
     file1 = tarfile.open(tar_path)
     file1.extractall(new_path)
 
     file1.close()
-    print('Done!')
+    print('Done!\n')
 
-    #rename files to jpg in correct order
+    #Renaming the files to JPG in the correct order
 
-    print('Converting files to jpg...')
+    print('Converting the files to JPG . . .')
 
     file = open(fr"{new_path}\manifest.json",)
     data = json.load(file)
@@ -38,11 +39,11 @@ while True:
         os.rename(fr"{new_path}\{page_name}",fr"{new_path}\{page_number}.jpg")
 
     file.close()
-    print('Done!')
+    print('Done!\n')
 
-    #zip it into a cbz
+    #Zipping the JPGs into a CBZ
 
-    print('Zipping it into a cbz....')
+    print('Zipping the JPGs into a CBZ . . .')
 
     zipped_file = zipfile.ZipFile(fr'{folder_path}\book.cbz','w')
 
@@ -51,22 +52,27 @@ while True:
             file_complete = folder_name + file_name 
 
             if 'jpg' in file_complete:
+                timestamp = time.mktime((1980, 1, 1, 0, 0, 0, 0, 0, 0))
+                os.utime(file_complete, (timestamp, timestamp))
                 zipped_file.write(file_complete, arcname = file_name)
 
     zipped_file.close()
-    print('Done!')
+    print('Done!\n')
 
-    print('Removing temp files...')       
+    print('Removing the temporary files...')       
     shutil.rmtree(new_path)
-    print('Done!')
+    print('Done!\n')
 
-    #get title
+    #Getting the book title
 
-    print('Getting Title of the book from the url.....')
+    print('Getting the book title from Google . . .')
+    try:
+        for url in search(uuid, num_results=3):
+            if "darkhorse" in url:
+                lorl = url
 
-    for url in search(uuid, stop=3):
-        if "darkhorse" in url:
-            lorl = url
+    except Exception:
+        print('\nUnable to get the book title using the following UUID:', uuid, '\nTry googling the ID inside quotation marks: “Example.” Then, rename the CBZ file manually.\n\nOperation completed.\n')
 
     ff = requests.get(lorl)
     ffx = bs4.BeautifulSoup(ff.text, 'html.parser')
@@ -76,9 +82,5 @@ while True:
     str3 = str3.replace(':', '-')
     os.rename(fr'{folder_path}\book.cbz', fr'{folder_path}\{str3}.cbz')
 
-    print('Done!')
-
-    print('Operatin completed!')
-    print('-'*25)
-
-
+    print('Done!\n')
+    print('\nOperation completed.\n')
