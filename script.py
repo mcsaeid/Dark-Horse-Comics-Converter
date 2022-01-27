@@ -8,11 +8,11 @@ import time
 from googlesearch import search
 import bs4
 
-print('This script will convert your Dark Horse comics to a CBZ format.\n')
+print('\nThis script will convert your Dark Horse comics to a CBZ format.\n')
 
 while True:
     print('-'*25)
-    tar_path = input('Enter the path of the tar file: ')
+    tar_path = input('Enter the path of the tar file without quotes: ')
     folder_path = os.path.dirname(tar_path)
     new_path = fr"{folder_path}\book"
 
@@ -72,8 +72,9 @@ while True:
                 lorl = url
 
     except Exception:
-        print('\nUnable to get the book title using the following UUID:', uuid, '\nTry googling the ID inside quotation marks: “Example.” Then, rename the CBZ file manually.\n\nOperation completed.\n')
+        print('\nUnable to get the book title.\n')
 
+    lorl = input("Please enter the book page URL, for example, “https://digital.darkhorse.com/books/aebf949665b14a90a6737274051ce527”: ")
     ff = requests.get(lorl)
     ffx = bs4.BeautifulSoup(ff.text, 'html.parser')
     str1 = ffx.title.text
@@ -82,5 +83,4 @@ while True:
     str3 = str3.replace(':', '-')
     os.rename(fr'{folder_path}\book.cbz', fr'{folder_path}\{str3}.cbz')
 
-    print('Done!\n')
-    print('\nOperation completed.\n')
+    print('\nOperation completed!\n')
