@@ -12,7 +12,7 @@ The scripts use the following Python modules: *os, json, tarfile, zipfile, shuti
 
 # Disclaimer
 
-THIS SCRIPT IS NOT MEANT TO PROMOTE OR FACILITATE PIRACY BUT RATHER TO BE A LEARNING TOOL AND A MEANS TO BACKUP YOUR OWNED COMICS FOR PERSONAL USAGE. PLEASE ENSURE WHETHER OR NOT THIS IS LEGAL IN YOUR COUNTRY.
+This script is not meant to promote or facilitate piracy but rather to be a learning tool and a means to backup your owned comics for personal usage. Please ensure whether or not this is legal in your country.
 
 # How to Use
 
